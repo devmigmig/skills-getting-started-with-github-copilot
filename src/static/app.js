@@ -6,9 +6,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Dark mode toggle functionality
   const darkModeToggle = document.getElementById("dark-mode-toggle");
+
+  function updateDarkModeButton() {
+    if (document.body.classList.contains("dark-mode")) {
+      darkModeToggle.textContent = "Light Mode";
+    } else {
+      darkModeToggle.textContent = "Dark Mode";
+    }
+  }
+
   darkModeToggle.addEventListener("click", () => {
     document.body.classList.toggle("dark-mode");
+    updateDarkModeButton();
   });
+
+  // Initialize the button text on page load
+  updateDarkModeButton();
 
   // Function to fetch activities from API
   async function fetchActivities() {
@@ -69,14 +82,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const result = await response.json();
 
       if (response.ok) {
-        messageDiv.textContent = result.message;
-        messageDiv.className = "success";
         signupForm.reset();
-      } else {
-        messageDiv.textContent = result.detail || "An error occurred";
-        messageDiv.className = "error";
       }
 
+      // Notification logic
+      messageDiv.textContent = response.ok ? result.message : result.detail || "An error occurred";
+      messageDiv.className = response.ok ? "success" : "error";
       messageDiv.classList.remove("hidden");
 
       // Hide message after 5 seconds
