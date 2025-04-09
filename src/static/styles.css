@@ -74,6 +74,7 @@ section h3 {
   margin-bottom: 8px;
 }
 
+/* Styling for participant info section */
 .activity-card ul {
   margin-top: 10px;
   padding-left: 20px;
@@ -84,6 +85,13 @@ section h3 {
 .activity-card ul li {
   margin-bottom: 5px;
   font-size: 14px;
+}
+
+.activity-card ul li::before {
+  content: "👤 ";
+  color: #0066cc;
+  font-weight: bold;
+  margin-right: 5px;
 }
 
 .form-group {
